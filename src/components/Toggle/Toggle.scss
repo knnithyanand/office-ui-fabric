@@ -22,7 +22,7 @@
     background-color: $ms-color-neutralSecondary;
     outline: 1px solid transparent;
     transition-property: background, left;
-    transition-duration: 250ms;
+    transition-duration: 200ms;
     transition-timing-function: cubic-bezier(.4, 0, .23, 1);
 
     @media screen and (-ms-high-contrast: active) {
@@ -213,7 +213,7 @@
   border-radius: 20px;
   cursor: pointer;
   transition-property: background, left, border-color;
-  transition-duration: 250ms;
+  transition-duration: 200ms;
   transition-timing-function: cubic-bezier(.4, 0, .23, 1);
   outline: 0;
 

@@ -21,7 +21,7 @@ namespace fabric {
      */
     constructor(container: HTMLElement) {
       this._container = container;
-      this._choiceField = <HTMLElement>this._container.querySelector(".ms-RadioButton-field");
+      this._choiceField = <HTMLElement>this._container.querySelector(".ms-ChoiceField-field");
       if (this._choiceField.getAttribute("aria-checked") === "true") {
           this._choiceField.classList.add("is-checked");
       }
