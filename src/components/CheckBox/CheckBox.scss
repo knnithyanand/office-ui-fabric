@@ -83,27 +83,6 @@
     }
   }
 
-  //== State: When the checkbox is checked
-  //
-  .ms-ChoiceField-input:checked,
-  &.is-checked {
-    &:before {
-      border: 10px solid $ms-color-themePrimary;
-      background-color: $ms-color-themePrimary;
-    }
-
-    &:after {
-      display: block;
-    }
-
-    &:hover,
-    &:focus {
-      &:before {
-        border-color: $ms-color-themeDarkAlt;
-      }
-    }
-  }
-
   //== State: A disabled checkbox
   //
   &.is-disabled {
@@ -133,6 +112,27 @@
     }
 
     &.is-checked:before {
+      border-color: $ms-color-themeDarkAlt;
+    }
+  }
+}
+
+//== State: When the checkbox is checked
+//
+.ms-ChoiceField-input:checked + .ms-ChoiceField-field,
+.ms-ChoiceField-field.is-checked {
+  &:before {
+    border: 10px solid $ms-color-themePrimary;
+    background-color: $ms-color-themePrimary;
+  }
+
+  &:after {
+    display: block;
+  }
+
+  &:hover,
+  &:focus {
+    &:before {
       border-color: $ms-color-themeDarkAlt;
     }
   }
