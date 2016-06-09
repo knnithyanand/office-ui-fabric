@@ -9,7 +9,7 @@ namespace fabric {
    * Adds basic demonstration functionality to .ms-ChoiceFieldGroup components.
    *
   */
-  export class ChoiceFieldGroup {
+  export class ChoiceFieldGroup extends CheckBox {
 
     private _choiceFieldGroup: HTMLElement;
     private _choiceFieldComponents: RadioButton[];
@@ -20,7 +20,9 @@ namespace fabric {
      * @constructor
      */
     constructor(container: HTMLElement) {
-      this._choiceFieldGroup = container;
+      super(container);
+
+      this._choiceFieldGroup = <HTMLElement>document.querySelector(".ms-ChoiceFieldGroup");
       this._choiceFieldComponents = [];
       this._initalSetup();
       this._addListeners();
@@ -28,17 +30,51 @@ namespace fabric {
 
     public removeListeners(): void {
       this._choiceFieldGroup.removeEventListener("msChoicefield", this._ChoiceFieldHandler.bind(this));
+      super.removeListeners();
+      this._choiceField.removeEventListener("click", this._RadioClickHandler.bind(this));
+      this._choiceField.addEventListener("keydown", this._RadioKeydownHandler.bind(this));
+    }
+
+    protected _addListeners(): void {
+      document.addEventListener("msChoicefield", this._ChoiceFieldHandler.bind(this), false);
+      super._addListeners({ignore: ["keydown", "click"]});
+      this._choiceField.addEventListener("click", this._RadioClickHandler.bind(this), false);
+      this._choiceField.addEventListener("keydown", this._RadioKeydownHandler.bind(this), false);
+    }
+
+    private _RadioClickHandler(event: MouseEvent): void {
+      event.stopPropagation();
+      event.preventDefault();
+      this._dispatchSelectEvent();
+    }
+
+    private _dispatchSelectEvent(): void {
+      let objDict = {
+        bubbles : true,
+        cancelable : true,
+        detail : {
+          name: this._choiceField.getAttribute("name"),
+          item: this
+        }
+      };
+      this._choiceField.dispatchEvent(new CustomEvent("msChoicefield", objDict));
+    }
+
+    private _RadioKeydownHandler(event: KeyboardEvent): void {
+      if (event.keyCode === 32) {
+        event.stopPropagation();
+        event.preventDefault();
+        if (!this._choiceField.classList.contains("is-disabled")) {
+            this._dispatchSelectEvent();
+        }
+      }
     }
 
     private _initalSetup(): void {
-        let choiceFieldElements: NodeListOf<Element> = this._choiceFieldGroup.querySelectorAll(".ms-RadioButton");
+        let choiceFieldElements: NodeListOf<Element> = this._choiceFieldGroup.querySelectorAll(".ms-ChoiceField");
         for (let i: number = 0; i < choiceFieldElements.length; i++) {
             this._choiceFieldComponents[i] =  new fabric.RadioButton(<HTMLElement>choiceFieldElements[i]);
         }
-    }
-
-    private _addListeners(): void {
-      document.addEventListener("msChoicefield", this._ChoiceFieldHandler.bind(this), false);
     }
 
     private _ChoiceFieldHandler(event: CustomEvent): void {

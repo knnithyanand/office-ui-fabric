@@ -6,7 +6,7 @@ var ChoiceFieldGroupModels = {
    "groupType": "radiogroup",
    "fields": [
      {
-       "component": "RadioButton",
+       "component": "CheckBox",
        "props": {
         "label": "Option 1",
         "modifier": "",
@@ -18,7 +18,7 @@ var ChoiceFieldGroupModels = {
        }
      },
      {
-       "component": "RadioButton",
+       "component": "CheckBox",
        "props": {
           "label": "Option 2",
           "modifier": "",
@@ -30,7 +30,7 @@ var ChoiceFieldGroupModels = {
         }
      },
      {
-       "component": "RadioButton",
+       "component": "CheckBox",
        "props": {
           "label": "Option 3",
           "modifier": "",
@@ -42,7 +42,7 @@ var ChoiceFieldGroupModels = {
         }
      },
      {
-       "component": "RadioButton",
+       "component": "CheckBox",
        "props": {
           "label": "Option 4",
           "modifier": "",

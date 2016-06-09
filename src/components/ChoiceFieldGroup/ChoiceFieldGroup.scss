@@ -9,4 +9,62 @@
     padding: 0;
     margin: 0;
   }
+
+  .ms-ChoiceField-field {
+    // The radio button circle container
+    &:before {
+      border-radius: 50%;
+    }
+
+    // The inner circle indicating a checked radio button
+    &:after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      bottom: 0;
+      right: 0;
+      transition-property: top, left, width, height;
+      transition-duration: 150ms;
+      transition-timing-function: cubic-bezier(.4, 0, .23, 1);
+      box-sizing: border-box;
+      display: block;
+    }
+  }
+
+  //== State: When the radio button is selected (checked)
+  //
+  .ms-ChoiceField-input:checked,
+  .ms-ChoiceField-field.is-checked {
+    &:before {
+      border: 2px solid $ms-color-themePrimary;
+      background-color: transparent;
+    }
+
+    &:after {
+      background-color: $ms-color-themePrimary;
+      top: 5px;
+      left: 5px;
+      width: 10px;
+      height: 10px;
+    }
+
+    &:hover,
+    &:focus {
+      &:before {
+        border-color: $ms-color-themePrimary;
+      }
+    }
+
+    //== State: A radio button in focus
+    //
+    &.in-focus {
+      &:before {
+        border-color: $ms-color-themePrimary;
+      }
+    }
+  }
 }
